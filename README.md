@@ -75,7 +75,6 @@ Before starting each milestone, create a feature branch with the name of the mil
     - `GET /booking/{bookingId}`
     - `PATCH /booking/{bookingId}`
     - `DELETE /booking/{bookingId}`
-<font color="RED">HAY DOS ENDPOINTS MAS DISPONIBLES, UpdateBooking Y PartialUpdateBooking. NO LOS AGREGUE PARA HACERLO PARALELO A COMO ESTA DEFINIDO EN STORE SERVICE, PERO TA, PARA QUE SEPAS NOMAS QUE HAY MAS PARA USAR</font>
 7. Add request and response models where appropriate.
 8. Write the **first test** for the following main scenario:
     - Create a booking and validate the response (`POST /booking`).

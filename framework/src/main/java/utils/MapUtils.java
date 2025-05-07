@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class MapUtils {
 
-    public static Map combineMaps(Map baseMap, Map overwritingMap) {
-        HashMap combinedMap = new HashMap();
+    public static <K,V> Map<K,V> combineMaps(Map<K,V> baseMap, Map<K,V> overwritingMap) {
+        HashMap<K,V> combinedMap = new HashMap<>();
 
         if (baseMap != null && !baseMap.isEmpty()) {
             combinedMap.putAll(baseMap);

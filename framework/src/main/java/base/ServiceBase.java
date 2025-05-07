@@ -1,6 +1,5 @@
 package base;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import io.restassured.response.Response;
 import models.requests.CredentialModel;
 import models.responses.ResponseContainer;
@@ -10,7 +9,6 @@ import utils.ErrorMessages;
 import utils.MapUtils;
 import utils.StringUtils;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -67,7 +65,7 @@ public class ServiceBase {
         return "token=" + token;
     }
 
-    private ResponseContainer buildResponse(Long endTime, Long startTime, Response response, Class responseClass) {
+    private <T> ResponseContainer<T> buildResponse(Long endTime, Long startTime, Response response, Class<T> responseClass) {
         Long responseTime = endTime - startTime;
 
         int status = response.statusCode();
@@ -77,12 +75,12 @@ public class ServiceBase {
             return new ResponseContainer<>(null, status, headers, responseTime);
         }
 
-        var data = response.body().as(responseClass);
+        T data = response.body().as(responseClass);
         return new ResponseContainer<>(data, status, headers, responseTime);
     }
 
-    protected ResponseContainer getOne(String url, Map<String, String> headers, Class responseClass) {
-        Map finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
+    protected <T> ResponseContainer<T> getOne(String url, Map<String, String> headers, Class<T> responseClass) {
+        Map<String, String> finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
 
         Long startTime = new Date().getTime();
         Response response = apiClient.get(url, finalHeaders);
@@ -92,7 +90,7 @@ public class ServiceBase {
     }
 
     protected ResponseContainer getMany(String url, Map<String, String> headers) {
-        Map finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
+        Map<String, String>  finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
 
         Long startTime = new Date().getTime();
         Response response = apiClient.get(url, finalHeaders);
@@ -101,8 +99,8 @@ public class ServiceBase {
         return buildResponse(endTime, startTime, response, List.class);
     }
 
-    protected ResponseContainer post(String url, Object payload, Map<String, String> headers, Class responseClass) {
-        Map finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
+    protected <T> ResponseContainer<T> post(String url, Object payload, Map<String, String> headers, Class<T> responseClass) {
+        Map<String, String> finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
 
         Long startTime = new Date().getTime();
         Response response = apiClient.post(url, payload, finalHeaders);
@@ -111,8 +109,8 @@ public class ServiceBase {
         return buildResponse(endTime, startTime, response, responseClass);
     }
 
-    protected ResponseContainer put(String url, Object payload, Map<String, String> headers, Class responseClass) {
-        Map finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
+    protected <T> ResponseContainer<T> put(String url, Object payload, Map<String, String> headers, Class<T> responseClass) {
+        Map<String, String> finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
 
         Long startTime = new Date().getTime();
         Response response = apiClient.put(url, payload, finalHeaders);
@@ -121,8 +119,8 @@ public class ServiceBase {
         return buildResponse(endTime, startTime, response, responseClass);
     }
 
-    protected ResponseContainer patch(String url, Object payload, Map<String, String> headers, Class responseClass) {
-        Map finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
+    protected <T> ResponseContainer<T> patch(String url, Object payload, Map<String, String> headers, Class<T> responseClass) {
+        Map<String, String> finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
 
         Long startTime = new Date().getTime();
         Response response = apiClient.patch(url, payload, finalHeaders);
@@ -131,8 +129,8 @@ public class ServiceBase {
         return buildResponse(endTime, startTime, response, responseClass);
     }
 
-    protected ResponseContainer delete(String url, Object payload, Map<String, String> headers, Class responseClass) {
-        Map finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
+    protected <T> ResponseContainer<T> delete(String url, Object payload, Map<String, String> headers, Class<T> responseClass) {
+        Map<String, String> finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
 
         Long startTime = new Date().getTime();
         Response response = apiClient.delete(url, payload, finalHeaders);
@@ -141,8 +139,8 @@ public class ServiceBase {
         return buildResponse(endTime, startTime, response, responseClass);
     }
 
-    protected ResponseContainer head(String url, Object payload, Map<String, String> headers, Class responseClass) {
-        Map finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
+    protected <T> ResponseContainer<T> head(String url, Object payload, Map<String, String> headers, Class<T> responseClass) {
+        Map<String, String> finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
 
         Long startTime = new Date().getTime();
         Response response = apiClient.head(url, payload, finalHeaders);
@@ -151,8 +149,8 @@ public class ServiceBase {
         return buildResponse(endTime, startTime, response, responseClass);
     }
 
-    protected ResponseContainer options(String url, Object payload, Map<String, String> headers, Class responseClass) {
-        Map finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
+    protected <T> ResponseContainer<T> options(String url, Object payload, Map<String, String> headers, Class<T> responseClass) {
+        Map<String, String> finalHeaders = MapUtils.combineMaps(defaultHeaders, headers);
 
         Long startTime = new Date().getTime();
         Response response = apiClient.options(url, payload, finalHeaders);

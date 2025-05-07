@@ -71,7 +71,9 @@ Before starting each milestone, create a feature branch with the name of the mil
 6. Implement methods in `BookingService` for the following operations:
     - `GET /booking`
     - `POST /booking`
+    - `PUT /booking/{bookingId}`
     - `GET /booking/{bookingId}`
+    - `PATCH /booking/{bookingId}`
     - `DELETE /booking/{bookingId}`
 <font color="RED">HAY DOS ENDPOINTS MAS DISPONIBLES, UpdateBooking Y PartialUpdateBooking. NO LOS AGREGUE PARA HACERLO PARALELO A COMO ESTA DEFINIDO EN STORE SERVICE, PERO TA, PARA QUE SEPAS NOMAS QUE HAY MAS PARA USAR</font>
 7. Add request and response models where appropriate.
@@ -114,16 +116,15 @@ Before starting each milestone, create a feature branch with the name of the mil
 ---
 
 ### **Milestone 4: Verify the booking was created**
-<font color="RED">REVISAR LA NOTA Y EL PUNTO CUATRO. CREO QUE NO APLICAN PARA EL ENDPOINT DE BOOKING DE LA MISMA FORMA QUE PARA EL DE PETSTORE</font>
 
 **Objective**: Make a request to the get booking endpoint to verify the booking was actually created.
 
-**Note**: when testing a POST endpoint you normally don't send the ID (it is generated automatically and returned to you in the response), but you might have noticed that this endpoint allows you to do that, and the order gets actually created with the ID you sent.
+**Note**: when testing a POST endpoint you normally don't send the ID (it is generated automatically and returned to you in the response).
 
-1. For your positive tests, after the response assertions, obtain the created order ID from the response
-2. Make a request to the `GET /booking/{bookingId}` endpoint with the order ID
-3. Verify the response of the Get Order endpoint is 200, hence, the order was created successfully.
-4. Since the test where you didn't provide the ID for the POST in the first place should now be failing, follow step 4 in Milestone 5 for handling it.
+1. For your positive tests, after the response assertions, obtain the created booking ID from the response
+2. Make a request to the `GET /booking/{bookingId}` endpoint with the booking ID
+3. Verify the response of the Get booking endpoint is 200, hence, the booking was created successfully.
+4. Since the test where you didn't provide the ID for the POST in the first place should now be failing, follow steps in Milestone 6 for handling it.
 
 **Deliverable**:
 
@@ -138,7 +139,9 @@ Before starting each milestone, create a feature branch with the name of the mil
 1. Write a test suite for each of the remaining endpoints in the Store Service:
     - `GET /booking`
     - `GET /booking/{bookingId}`
+    - `PUT /booking/{bookingId}`
     - `DELETE /booking/{bookingId}`
+    - `PATCH /booking/{bookingId}`
 
 **Deliverable**:
 
@@ -147,20 +150,17 @@ Before starting each milestone, create a feature branch with the name of the mil
 ---
 
 ### **Milestone 6: Pre and Post conditions: BeforeEach and AfterEach**
-<font color="red">LO AJUSTE PARA QUE TENGA SENTIDO CON JUNIT. VERIFICAR QUE ES LO QUE SE ESPERA</font>
 
-**Objective**: Write Before for pre-conditions and After for post-conditions.
+**Objective**: Write Before for pre-conditions and After for post-conditions..
 
-Note: Remember that with this API, to create an order that you can actually use in the Get Order scenarios you must provide an order ID in the order creation.
-
-1. Write a [before each](https://junit.org/junit5/docs/current/user-guide/#writing-tests-definitions) in the Get Order test suite.
-    1. Add a Before function that creates an order by calling the right method in the BookingService model.
-    2. Obtain and store the order ID (the variable for this must be declared above the before function).
-    3. Use the saved Order ID in the Get Order test.
-2. Write an [after each](https://junit.org/junit5/docs/current/user-guide/#writing-tests-definitions) in the Create Order test suite. This is very useful for cleaning up data after a test execution.
-    1. Declare an orderId variable on top of the test suite
-    2. After every positive test, update the orderId variable with the newly created Order ID.
-    3. Add an AfterEach hook that deletes the created orders by calling the right method in the BookingService model.
+1. Write a [before each](https://junit.org/junit5/docs/current/user-guide/#writing-tests-definitions) in the Get booking test suite.
+    1. Add a Before function that creates a booking by calling the right method in the BookingService model.
+    2. Obtain and store the booking ID (the variable for this must be declared above the before function).
+    3. Use the saved booking ID in the Get Booking test.
+2. Write an [after each](https://junit.org/junit5/docs/current/user-guide/#writing-tests-definitions) in the Create booking test suite. This is very useful for cleaning up data after a test execution.
+    1. Declare an bookingId variable on top of the test suite
+    2. After every positive test, update the bookingId variable with the newly created Booking Id.
+    3. Add an AfterEach hook that deletes the created booking by calling the right method in the BookingService model.
 
 **Note**: As the name implies, @BeforeEach and @AfterEach functions run before and after any test of the class, so make sure to not create a test in the class that does not need of said functions, or at least that it is affected by them
 
@@ -182,16 +182,14 @@ Note: Remember that with this API, to create an order that you can actually use 
 
 ---
 
-<font color="RED">SE REFIERE A UN ASPECTO EXTRA DE LA PETSTORE API, O DE IMPLEMENTAR UN NUEVO SERVICE PARA LA PETSTORE. LO REMUEVO?</font>
 ### **Milestone 8: Extend to Other Services**
+**Objective**: Implement automation for additional services (`Auth`) service.
 
-**Objective**: Implement automation for additional services (`Pet` and `User`).
-
-1. Repeat the previous steps for **Pet** and **User** services.
+1. Repeat the previous steps for **Auth** service.
 
 **Deliverable**:
 
-- Create separate PRs for each suite across both services.
+- Create a PR with the new tests and details covered.
 
 ---
 

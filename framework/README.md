@@ -309,13 +309,7 @@ Now it’s time to use it. Go ahead and explore the test examples in this repo a
 
 If you have any questions, encounter any issues, or simply want to provide feedback regarding this project, I'm here to help and listen!
 
-Here are a few ways you can reach out for support or assistance:
-
-- **Submit an Issue**: If you find any bugs or issues, feel free to open an issue on the [GitHub issues page](https://github.com/damianpereira86/api-framework-ts-mocha/issues). Please provide as much detail as possible to help me understand and address the problem quickly. <font color="red">CAMBIAR A LA PAGINA DE GIULI O QUITAR</font>
-
-- **Discussions**: For questions, suggestions, or general discussions about the project, please use the [Discussions](https://github.com/damianpereira86/api-framework-ts-mocha/discussions) section of the GitHub repository. This is a great place to connect with other users and contributors, share ideas, and get advice. <font color="red">IGUAL ACA</font>
-
-- **Email**: If you prefer direct communication, you can email me at [giulianabentancor@gmail.com](mailto:giulianabentancor@gmail.com). I'll try to respond as promptly as possible.
+- **Email**: You can email me at [giulianabentancor@gmail.com](mailto:giulianabentancor@gmail.com). I'll try to respond as promptly as possible.
 
 ## Contribution Guidelines
 

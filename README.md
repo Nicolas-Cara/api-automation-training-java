@@ -3,9 +3,9 @@
 Welcome to the API Automation Training! This repository serves as the foundation for the training, providing a base API Automation Framework and step-by-step guidance for participants to build their API automation skills.
 
 The training is designed for participants to fork this repository, develop their tests for a mock API, and create Pull Requests (PRs) for feedback and review. Mentors will review pull requests (PRs) regularly, providing feedback and guidance to ensure learning and progress.
-Training Objectives
 
 ---
+**Training Objectives**
 
 1.  **Learn the basics of Java:**
     I'd like you to understand the fundamental features of Java, including classes, inheritance, and other key concepts. These concepts will help you write better, more maintainable code for API automation.

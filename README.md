@@ -19,7 +19,7 @@ Training Objectives
     Grasp core concepts like service modeling (encapsulating API endpoints), organizing test cases, setting up environments with .env files, and strategies for functional and non-functional API testing.
 
 4.  **Implement Test Automation:**
-    Use the base framework to write tests for real-world scenarios using the Booking API. Implement robust, maintainable test scripts for CRUD operations and edge cases.
+    Use the base framework to write tests for real-world scenarios using the CatCafeProject API. Implement robust, maintainable test scripts for CRUD operations and edge cases.
 
 5.  **Collaborate Effectively:**
     Develop skills in using Git workflows for version control. Create feature branches, submit Pull Requests (PRs), and respond to feedback from mentors. Learn best practices for working in an asynchronous environment while maintaining high-quality contributions.
@@ -32,7 +32,7 @@ Training Objectives
 2.    **Add collaborators:** Add your mentors as collaborators to the repo.
 3.    **Branching:** Use feature branches (e.g., feature/milestone-1) for your changes.
 4.    **Pull Requests:** Create PRs for each milestone. Include a description of your changes and any challenges faced. Add your mentor as a reviewer.
-5.    **Code Reviews:** Ask someone to review your PRs on demand, providing feedback.
+5.    **Code Reviews:** Mentors/Teacher will review your PRs, providing feedback. 
 6.    **Feedback:** Address feedback promptly and resubmit your PR.
 
 ---
@@ -61,24 +61,23 @@ Before starting each milestone, create a feature branch with the name of the mil
 
 3. Update .env with the test API base URL:
     ```yaml
-    BASEURL=https://restful-booker.herokuapp.com
+    BASEURL=http://catcafeproject.us-east-1.elasticbeanstalk.com
     ```
 4. Explore the framework:
-    - Read the [API Automation Framework] (https://github.com/GiuliBentancor/api-automation-training-java/blob/main/framework/README.md) Readme. 
+    - Read the README.me file in the framework folder. 
     - Understand the `ServiceBase` class and its usage in service models.
+    - Understand the API that will be used: http://catcafeproject.us-east-1.elasticbeanstalk.com/api-docs/
 
-5. Create a new `BookingService` extending `ServiceBase`.
-6. Implement methods in `BookingService` for the following operations:
-    - `GET /booking`
-    - `POST /booking`
-    - `PUT /booking/{bookingId}`
-    - `GET /booking/{bookingId}`
-    - `PATCH /booking/{bookingId}`
-    - `DELETE /booking/{bookingId}`
+5. Create a new `CatService` extending `ServiceBase`.
+6. Implement methods in `CatService` for the following operations:
+    - `GET /cats`
+    - `POST /cats`
+    - `PUT /cats/{catId}`
+    - `GET /cats/{catId}`
+    - `PATCH /cats/{catId}`
+    - `DELETE /cats/{catId}`
 7. Add request and response models where appropriate.
-8. Write the **first test** for the following main scenario:
-    - Create a booking and validate the response (`POST /booking`).
-
+8. Write the first test for the POST /cats endpoint to verify that a Cat can be created successfully.
 
 **Deliverable**:
 
@@ -92,7 +91,7 @@ Before starting each milestone, create a feature branch with the name of the mil
 2. Explore the `.github/workflows/main.yml` file to understand the workflow triggers and steps.
 3. Based on the research you did on GitHub Actions and your experience running the tests in IntelliJ, adjust the Maven line in the main.yml file so the tests are run in the pipeline.
 4. Create a new environment called "Testing" in **Settings** > **Environments** > **New environment**
-5. Configure the `BASEURL` as an environment variable with value: `https://restful-booker.herokuapp.com`
+5. Configure the `BASEURL` as an environment variable with value: `http://catcafeproject.us-east-1.elasticbeanstalk.com`
 
 **Deliverable**:
 
@@ -100,13 +99,49 @@ Before starting each milestone, create a feature branch with the name of the mil
 
 ---
 
-### **Milestone 3: Complete the Create Order Suite**
+### **Milestone 3:  Implement the Create Cat Suite**
 
-**Objective**: Write tests for the rest of the Create Booking test Suite.
+**Objective**: Create and write tests for the Create Cat test Suite.
 
-1. Write additional tests for the Create Order (`POST /booking`) endpoint.
+1. Write additional tests for the Create Order (`POST /cats`) endpoint.
 2. Include positive and negative tests.
 3. Use tags like `@Tag("Smoke")` or `@Tag("Regression")` for test categorization. `@Tag("Smoke")` tests should be the ones that are absolutely required to pass.
+
+**Deliverable**:
+
+- Create a PR with the tests and a brief summary of the scenarios covered. Remember to check the pipeline every time a PR is created.
+
+---
+
+### **Milestone 4: Create Test Suites for the rest of the Cat Service*
+
+**Objective**: Write tests for the rest of the Cat Service following the practices covered above.
+
+        Write a test suite for each of the remaining endpoints in the Cat Service:
+        - GET /cats
+        - GET /cats/{catId}
+        - DELETE /cats/{catId}
+        - PATCH /cats/{catId}
+        - PUT /cats/{catId}
+
+
+**Deliverable**:
+
+- For each test suite, create a PR with the tests.
+
+---
+
+### **Milestone 5: Pre and Post conditions: Hooks**
+
+**Objective**: Write hooks for pre and post-conditions.
+
+1. Write a [before HOOK](https://junit.org/junit5/docs/current/user-guide/#writing-tests-definitions) in the Get Cat test suite.
+    i. Add a Before hook that creates a cat by calling the right method in the CatService model.
+    ii. Obtain and store the catId (the variable for this must be declared above the before hook).
+    iii. se the saved catId in the Get Cat test.
+2. Write an [after HOOK](https://junit.org/junit5/docs/current/user-guide/#writing-tests-definitions) in the Create Cat test suite. This is very useful for cleaning up data after a test execution.
+     i. After every positive test, update the catId variable with the newly created Cat ID.
+     ii. Add an AfterEach hook that deletes the created cat by calling the right method in the CatService model.
 
 **Deliverable**:
 
@@ -114,62 +149,7 @@ Before starting each milestone, create a feature branch with the name of the mil
 
 ---
 
-### **Milestone 4: Verify the booking was created**
-
-**Objective**: Make a request to the get booking endpoint to verify the booking was actually created.
-
-**Note**: when testing a POST endpoint you normally don't send the ID (it is generated automatically and returned to you in the response).
-
-1. For your positive tests, after the response assertions, obtain the created booking ID from the response
-2. Make a request to the `GET /booking/{bookingId}` endpoint with the booking ID
-3. Verify the response of the Get booking endpoint is 200, hence, the booking was created successfully.
-4. Since the test where you didn't provide the ID for the POST in the first place should now be failing, follow steps in Milestone 6 for handling it.
-
-**Deliverable**:
-
-- Create a PR with the tests and a brief summary of the changes.
-
----
-
-### **Milestone 5: Create Test Suites for the rest of the Booking Service**
-
-**Objective**: Write tests for the rest of the Store service following the practices covered above.
-
-1. Write a test suite for each of the remaining endpoints in the Store Service:
-    - `GET /booking`
-    - `GET /booking/{bookingId}`
-    - `PUT /booking/{bookingId}`
-    - `DELETE /booking/{bookingId}`
-    - `PATCH /booking/{bookingId}`
-
-**Deliverable**:
-
-- **For each test suite**, create a PR with the tests and a brief summary of the scenarios covered.
-
----
-
-### **Milestone 6: Pre and Post conditions: BeforeEach and AfterEach**
-
-**Objective**: Write Before for pre-conditions and After for post-conditions..
-
-1. Write a [before each](https://junit.org/junit5/docs/current/user-guide/#writing-tests-definitions) in the Get booking test suite.
-    1. Add a Before function that creates a booking by calling the right method in the BookingService model.
-    2. Obtain and store the booking ID (the variable for this must be declared above the before function).
-    3. Use the saved booking ID in the Get Booking test.
-2. Write an [after each](https://junit.org/junit5/docs/current/user-guide/#writing-tests-definitions) in the Create booking test suite. This is very useful for cleaning up data after a test execution.
-    1. Declare an bookingId variable on top of the test suite
-    2. After every positive test, update the bookingId variable with the newly created Booking Id.
-    3. Add an AfterEach hook that deletes the created booking by calling the right method in the BookingService model.
-
-**Note**: As the name implies, @BeforeEach and @AfterEach functions run before and after any test of the class, so make sure to not create a test in the class that does not need of said functions, or at least that it is affected by them
-
-**Deliverable**:
-
-- Create a PR with the changes and a brief summary.
-
----
-
-### **Milestone 7: Verify endpoints basic Performance**
+### **Milestone 6: Verify endpoints basic Performance**
 
 **Objective**: Expand the test suite with basic performance test cases.
 
@@ -181,16 +161,32 @@ Before starting each milestone, create a feature branch with the name of the mil
 
 ---
 
-### **Milestone 8: Extend to Other Services**
-**Objective**: Implement automation for additional services (`Auth`) service.
+### **Milestone 7: Extend to Other Services**
+**Objective**:  Implement automation for additional services (Adopter and User).
 
-1. Repeat the previous steps for **Auth** service.
+1. Repeat the previous steps for **Adopter** and **User** service.
+2. Create at least one user in the DB without deleting it.
 
 **Deliverable**:
 
-- Create a PR with the new tests and details covered.
-
+- Create separate PRs for each suite across both services.
 ---
+
+### **Milestone 8: Authentication**
+**Objective**: Implement the authenticate method. Extend automation for the Staff service.
+
+1. Go to the ServiceBase class and find the example authenticate method.
+2. Read the method and its documentation to understand what it does.
+3. Now read the CatCafeProject documentation to understand how the authentication works for this API.
+4. Update the authenticate method in the ServiceBase class and any other part of the code you need, to implement authentication for your Staff tests using the SessionManager.
+5. Implement the StaffService and its test suite.
+6. Use the authentication method in your Staff tests:
+    i. Add the USER and PASSWORD environment variables in the framework/.env file, using the data from an existing user that you created on step 2 from Milestone7.
+    ii. Modify the tests to call the authenticate method from a before hook, sending the credentials from your env file.
+    iii.Create the secret variables "USER", "PASSWORD", and "JWT_SECRET" in your "Local" environment on Github.
+Deliverable:
+
+Create separate PRs for the implementation of the authentication infrastructure and for the Staff service and tests.
 
 ## Tips for Success
 

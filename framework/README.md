@@ -136,10 +136,13 @@ public class BookingService extends ServiceBase {
         return this.post(this.url, model, headers, BookingResponse.class);
     }
 
-    public ResponseContainer<BookingModel> getBooking(Long bookingId, Map<String, String> headers) {
-        return this.getOne(this.url + "/" + bookingId, headers, BookingModel.class);
+    public ResponseContainer<BookingModel> getBookingById(Long bookingId, Map<String, String> headers) {
+        return this.getSingleObject(this.url + "/" + bookingId, headers, BookingModel.class);
     }
 
+    public ResponseContainer<List<BookingModel>> getBookings(Map<String, String> headers) {
+        return this.getListOfObjects(this.url, headers);
+    }
 }
 ```
 
@@ -174,9 +177,7 @@ Next, you can create a simple test like this.
 ```java
 @Test
 public void testGetBooking() {
-    service.authenticate();
     ResponseContainer<BookingModel> response = service.getBooking(1l, null);
-
     Assertions.assertEquals(200, response.getStatus());
     Assertions.assertNotNull(response.getData());
 }
@@ -199,9 +200,8 @@ public void createBookingSuccessful() {
     bookingDates.setCheckout("2019-01-01");
     model.setBookingdates(bookingDates);
 
-    service.authenticate();
     ResponseContainer<BookingResponse> response = service.addBooking(model, null);
-    
+
     BookingModel responseModel = response.getData().getBooking();
     
     Assertions.assertEquals(200, response.getStatus());
@@ -225,8 +225,7 @@ Request duration is measured and saved to the responseTime property of the respo
 ```java
 @Test
 public void getBookingSuccessfulLessThan1000ms() {
-    service.authenticate();
-    ResponseContainer<BookingModel> response = service.getBooking(1000l, null);
+    ResponseContainer<BookingModel> response = service.getBookingById(1000l, null);
 
     Assertions.assertEquals(200, response.getStatus());
     Assertions.assertTrue(response.getResponseTime() < 1000);

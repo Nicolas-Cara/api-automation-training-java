@@ -20,7 +20,6 @@ Training Objectives
 
 4.  **Implement Test Automation:**
     Use the base framework to write tests for real-world scenarios using the CatCafeProject API. Implement robust, maintainable test scripts for CRUD operations and edge cases.
-    Use the base framework to write tests for real-world scenarios using the CatCafeProject API. Implement robust, maintainable test scripts for CRUD operations and edge cases.
 
 5.  **Collaborate Effectively:**
     Develop skills in using Git workflows for version control. Create feature branches, submit Pull Requests (PRs), and respond to feedback from mentors. Learn best practices for working in an asynchronous environment while maintaining high-quality contributions.

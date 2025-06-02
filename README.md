@@ -81,6 +81,7 @@ Before starting each milestone, create a feature branch with the milestone's nam
 
 - Create a pull request (PR) with the change, including a brief description of your implementation process.
 
+---
 ### Milestone 2: CI/CD Pipeline
 
 **Objective**: Configure and understand the GitHub Action to run tests on each PR and merge to `main`.

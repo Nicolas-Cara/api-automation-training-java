@@ -111,9 +111,9 @@ Before starting each milestone, create a feature branch with the milestone's nam
 
 ---
 
-### **Milestone 4: Create Test Suites for the rest of the Cat Service*
+### ** Milestone 4: Create Test Suites for the rest of the Cat Service **
 
-**Objective**: Write tests for the remaining Cat Service components, following the practices covered above.
+**Objective**: Write tests for the remaining Cat Service components, adhering to the practices outlined above.
 
         Write a test suite for each of the remaining endpoints in the Cat Service:
         - GET /cats

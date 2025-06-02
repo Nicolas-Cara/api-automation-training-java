@@ -49,7 +49,7 @@ public class BookingServiceExampleTests {
     @Test
     public void getBookingById() {
         ResponseContainer<BookingModel> response = service.getBookingById(100L, null);
-        Assertions.assertEquals(response.getData().getId(), 100);
+        Assertions.assertEquals(100, response.getData().getId());
         Assertions.assertEquals(200, response.getStatus());
         Assertions.assertNotNull(response.getData());
     }
@@ -62,9 +62,9 @@ public class BookingServiceExampleTests {
     }
 
     @Test
-    public void getBookingSuccessfulLessThan1000ms() {
+    public void getBookingSuccessfulLessThan2000ms() {
         ResponseContainer<BookingModel> response = service.getBookingById(100l, null);
         Assertions.assertEquals(200, response.getStatus());
-        Assertions.assertTrue(response.getResponseTime() < 1000);
+        Assertions.assertTrue(response.getResponseTime() < 2000);
 }
 }

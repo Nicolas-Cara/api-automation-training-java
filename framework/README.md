@@ -136,10 +136,13 @@ public class BookingService extends ServiceBase {
         return this.post(this.url, model, headers, BookingResponse.class);
     }
 
-    public ResponseContainer<BookingModel> getBooking(Long bookingId, Map<String, String> headers) {
-        return this.getOne(this.url + "/" + bookingId, headers, BookingModel.class);
+    public ResponseContainer<BookingModel> getBookingById(Long bookingId, Map<String, String> headers) {
+        return this.getSingleObject(this.url + "/" + bookingId, headers, BookingModel.class);
     }
 
+    public ResponseContainer<List<BookingModel>> getBookings(Map<String, String> headers) {
+        return this.getListOfObjects(this.url, headers);
+    }
 }
 ```
 
@@ -174,9 +177,7 @@ Next, you can create a simple test like this.
 ```java
 @Test
 public void testGetBooking() {
-    service.authenticate();
     ResponseContainer<BookingModel> response = service.getBooking(1l, null);
-
     Assertions.assertEquals(200, response.getStatus());
     Assertions.assertNotNull(response.getData());
 }
@@ -199,9 +200,8 @@ public void createBookingSuccessful() {
     bookingDates.setCheckout("2019-01-01");
     model.setBookingdates(bookingDates);
 
-    service.authenticate();
     ResponseContainer<BookingResponse> response = service.addBooking(model, null);
-    
+
     BookingModel responseModel = response.getData().getBooking();
     
     Assertions.assertEquals(200, response.getStatus());
@@ -225,8 +225,7 @@ Request duration is measured and saved to the responseTime property of the respo
 ```java
 @Test
 public void getBookingSuccessfulLessThan1000ms() {
-    service.authenticate();
-    ResponseContainer<BookingModel> response = service.getBooking(1000l, null);
+    ResponseContainer<BookingModel> response = service.getBookingById(1000l, null);
 
     Assertions.assertEquals(200, response.getStatus());
     Assertions.assertTrue(response.getResponseTime() < 1000);
@@ -309,13 +308,7 @@ Now it’s time to use it. Go ahead and explore the test examples in this repo a
 
 If you have any questions, encounter any issues, or simply want to provide feedback regarding this project, I'm here to help and listen!
 
-Here are a few ways you can reach out for support or assistance:
-
-- **Submit an Issue**: If you find any bugs or issues, feel free to open an issue on the [GitHub issues page](https://github.com/damianpereira86/api-framework-ts-mocha/issues). Please provide as much detail as possible to help me understand and address the problem quickly. <font color="red">CAMBIAR A LA PAGINA DE GIULI O QUITAR</font>
-
-- **Discussions**: For questions, suggestions, or general discussions about the project, please use the [Discussions](https://github.com/damianpereira86/api-framework-ts-mocha/discussions) section of the GitHub repository. This is a great place to connect with other users and contributors, share ideas, and get advice. <font color="red">IGUAL ACA</font>
-
-- **Email**: If you prefer direct communication, you can email me at [giulianabentancor@gmail.com](mailto:giulianabentancor@gmail.com). I'll try to respond as promptly as possible.
+- **Email**: You can email me at [giulianabentancor@gmail.com](mailto:giulianabentancor@gmail.com). I'll try to respond as promptly as possible.
 
 ## Contribution Guidelines
 

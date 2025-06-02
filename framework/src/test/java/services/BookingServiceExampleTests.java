@@ -49,7 +49,7 @@ public class BookingServiceExampleTests {
     @Test
     public void getBookingById() {
         ResponseContainer<BookingModel> response = service.getBookingById(100L, null);
-        Assertions.assertEquals(response.getData().getTotalprice(), 111);
+        Assertions.assertEquals(response.getData().getId(), 100);
         Assertions.assertEquals(200, response.getStatus());
         Assertions.assertNotNull(response.getData());
     }

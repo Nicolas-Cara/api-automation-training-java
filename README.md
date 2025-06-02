@@ -2,8 +2,6 @@
 
 Welcome to the API Automation Training! This repository serves as the foundation for the training, providing a base API Automation Framework and step-by-step guidance for participants to build their API automation skills.
 
-Find the API Framework documentation here.
-
 The training is designed for participants to fork this repository, develop their tests for a mock API, and create Pull Requests (PRs) for feedback and review. Mentors will review pull requests (PRs) regularly, providing feedback and guidance to ensure learning and progress.
 Training Objectives
 
